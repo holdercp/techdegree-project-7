@@ -2,7 +2,7 @@
   "name": "twitter-interface",
   "version": "1.0.0",
   "description": "Use Twitter’s REST API to access your Twitter profile information and render it to a user.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
