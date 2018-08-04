@@ -2,9 +2,9 @@
   "name": "twitter-interface",
   "version": "1.0.0",
   "description": "Use Twitter’s REST API to access your Twitter profile information and render it to a user.",
-  "main": "app.js",
+  "main": "js/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-server": "./node_modules/nodemon/bin/nodemon.js js/app.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
+    "nodemon": "^1.18.3",
     "prettier": "^1.14.0",
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
