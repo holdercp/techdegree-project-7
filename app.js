@@ -12,13 +12,15 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  twit
-    .get('statuses/home_timeline', { count: 5 })
+  const timelineP = twit.get('statuses/home_timeline', { count: 5 });
+  const followersP = twit.get('friends/list', { count: 5 });
+
+  Promise.all([timelineP, followersP])
     .catch((err) => {
       console.log(err);
     })
     .then((result) => {
-      const timeline = result.data.map(tweet => ({
+      const timeline = result[0].data.map(tweet => ({
         name: tweet.user.name,
         handle: tweet.user.screen_name,
         imageProf: tweet.user.profile_image_url_https,
@@ -28,13 +30,19 @@ app.get('/', (req, res) => {
         countFav: tweet.favorite_count,
       }));
 
-      res.render('index', { timeline });
+      const friends = result[1].data.users.map(friend => ({
+        name: friend.name,
+        handle: friend.screen_name,
+        imageProf: friend.profile_image_url_https,
+      }));
+
+      res.render('index', { timeline, friends });
     });
 });
 
 app.get('/test', (req, res) => {
   twit
-    .get('statuses/home_timeline', { count: 5 })
+    .get('friends/list', { count: 5 })
     .catch((err) => {
       res.send(err);
     })
