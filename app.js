@@ -14,8 +14,9 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   const timelineP = twit.get('statuses/home_timeline', { count: 5 });
   const followersP = twit.get('friends/list', { count: 5 });
+  const messagesP = twit.get('direct_messages/events/list', { count: 5 });
 
-  Promise.all([timelineP, followersP])
+  Promise.all([timelineP, followersP, messagesP])
     .catch((err) => {
       console.log(err);
     })
@@ -36,13 +37,19 @@ app.get('/', (req, res) => {
         imageProf: friend.profile_image_url_https,
       }));
 
-      res.render('index', { timeline, friends });
+      const messages = result[2].data.events.map(message => ({
+        senderId: message.message_create.sender_id,
+        text: message.message_create.message_data.text,
+        hoursAgo: util.hoursDiff(parseInt(message.created_timestamp, 10)),
+      }));
+
+      res.render('index', { timeline, friends, messages });
     });
 });
 
 app.get('/test', (req, res) => {
   twit
-    .get('friends/list', { count: 5 })
+    .get('direct_messages/events/list', { count: 5 })
     .catch((err) => {
       res.send(err);
     })
