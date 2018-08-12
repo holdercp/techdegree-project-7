@@ -1,7 +1,7 @@
 const express = require('express');
 const Twit = require('twit');
 const config = require('./config.js');
-const util = require('./utilities.js');
+const dateHelper = require('./helpers/dates.js');
 
 const app = express();
 const twit = new Twit(config);
@@ -14,7 +14,7 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   const timelineP = twit.get('statuses/home_timeline', { count: 5 });
   const followersP = twit.get('friends/list', { count: 5 });
-  const messagesP = twit.get('direct_messages/events/list', { count: 5 });
+  const messagesP = twit.get('direct_messages/events/list');
 
   Promise.all([timelineP, followersP, messagesP])
     .catch((err) => {
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
         handle: tweet.user.screen_name,
         imageProf: tweet.user.profile_image_url_https,
         text: tweet.text,
-        hoursAgo: util.hoursDiff(tweet.created_at),
+        hoursAgo: dateHelper.hoursDiff(tweet.created_at),
         countRT: tweet.retweet_count,
         countFav: tweet.favorite_count,
       }));
@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
       const messages = result[2].data.events.map(message => ({
         senderId: message.message_create.sender_id,
         text: message.message_create.message_data.text,
-        hoursAgo: util.hoursDiff(parseInt(message.created_timestamp, 10)),
+        hoursAgo: dateHelper.hoursDiff(parseInt(message.created_timestamp, 10)),
       }));
 
       res.render('index', { timeline, friends, messages });
