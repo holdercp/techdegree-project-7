@@ -3,7 +3,7 @@ ul.app--message--list
     ul.app--message--conversation
       each message in messages
         li(class=(message.senderId === '3314259119') ? 'app--message--me' : 'app--message')
-          .app--avatar(style='background-image: url(images/f-spore.png)')
-            img(src='images/f-spore.png')
+          .app--avatar(style=`background-image: url(${message.senderImg})`)
+            img(src=message.senderImg)
           p.app--message--text= message.text
           p.app--message--timestamp= `${message.hoursAgo === 0 ? '<1' : message.hoursAgo}h ago`
