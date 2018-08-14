@@ -3,8 +3,8 @@ ul.app--tweet--list
     li
       strong.app--tweet--timestamp= `${tweet.hoursAgo === 0 ? '<1' : tweet.hoursAgo}h`
       a.app--tweet--author
-        .app--avatar(style=`background-image: url(${tweet.imageProf})`)
-          img(src=`${tweet.imageProf}`)
+        .app--avatar(style=`background-image: url(${tweet.profImg})`)
+          img(src=`${tweet.profImg}`)
         h4= tweet.name
         |  @#{tweet.handle}
       p= tweet.text

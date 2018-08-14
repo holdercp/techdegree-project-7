@@ -25,7 +25,7 @@ const twitter = (config) => {
   const getTimeline = () => twit.get('statuses/home_timeline', { count: 5 }).then(result => result.data.map(tweet => ({
     name: tweet.user.name,
     handle: tweet.user.screen_name,
-    imageProf: tweet.user.profile_image_url_https,
+    profImg: tweet.user.profile_image_url_https,
     text: tweet.text,
     hoursAgo: dateHelper.hoursDiff(tweet.created_at),
     countRT: tweet.retweet_count,
@@ -35,7 +35,7 @@ const twitter = (config) => {
   const getFriends = () => twit.get('friends/list', { count: 5 }).then(result => result.data.users.map(friend => ({
     name: friend.name,
     handle: friend.screen_name,
-    imageProf: friend.profile_image_url_https,
+    profImg: friend.profile_image_url_https,
   })));
 
   const getMessages = () => twit.get('direct_messages/events/list').then((messageList) => {
