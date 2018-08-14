@@ -4,6 +4,15 @@ const dateHelper = require('../helpers/dates.js');
 const twitter = (config) => {
   const twit = new Twit(config);
 
+  const getUser = () => twit
+    .get('account/settings')
+    .then(user => user.data.screen_name)
+    .then(handle => twit.get('users/show', { screen_name: handle }))
+    .then(userData => ({
+      handle: userData.data.screen_name,
+      profImg: userData.data.profile_image_url_https,
+    }));
+
   const getSenderImg = userId => twit.get('users/show', { user_id: userId }).then(sender => sender.data.profile_image_url_https);
 
   const processMessage = message => getSenderImg(message.message_create.sender_id).then(senderImgUrl => ({
@@ -38,6 +47,7 @@ const twitter = (config) => {
     getTimeline,
     getFriends,
     getMessages,
+    getUser,
   };
 };
 
