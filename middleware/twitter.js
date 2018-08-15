@@ -15,13 +15,6 @@ const twitter = (config) => {
 
   const getSenderImg = userId => twit.get('users/show', { user_id: userId }).then(sender => sender.data.profile_image_url_https);
 
-  const processMessage = message => getSenderImg(message.message_create.sender_id).then(senderImgUrl => ({
-    senderId: message.message_create.sender_id,
-    text: message.message_create.message_data.text,
-    hoursAgo: dateHelper.hoursDiff(parseInt(message.created_timestamp, 10)),
-    senderImg: senderImgUrl,
-  }));
-
   const getTimeline = () => twit.get('statuses/home_timeline', { count: 5 }).then(result => result.data.map(tweet => ({
     name: tweet.user.name,
     handle: tweet.user.screen_name,
@@ -38,9 +31,31 @@ const twitter = (config) => {
     profImg: friend.profile_image_url_https,
   })));
 
+  const onlyUniqueIds = (ids, message) => {
+    const id = message.message_create.sender_id;
+    if (!ids.includes(id)) ids.push(id);
+    return ids;
+  };
+
   const getMessages = () => twit.get('direct_messages/events/list').then((messageList) => {
-    const messageProms = messageList.data.events.map(processMessage);
-    return Promise.all(messageProms);
+    const uniqueIds = messageList.data.events.reduce(onlyUniqueIds, []);
+
+    return Promise.all(
+      // First, map sender id to img url
+      uniqueIds.map(id => getSenderImg(id).then(img => ({
+        [id]: img,
+      }))),
+    ).then((senderImgs) => {
+      // Then transform arr into a single object of key: value pairs
+      const senderIdAndImg = Object.assign({}, ...senderImgs);
+
+      return messageList.data.events.map(message => ({
+        senderId: message.message_create.sender_id,
+        text: message.message_create.message_data.text,
+        hoursAgo: dateHelper.hoursDiff(parseInt(message.created_timestamp, 10)),
+        senderImg: senderIdAndImg[message.message_create.sender_id],
+      }));
+    });
   });
 
   return {
