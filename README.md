@@ -92,4 +92,4 @@ To get an "exceeds" rating, you can expand on the project in the following ways:
 
 ### Custom background image
 
-- [ ] Include your personal background image from Twitter as a background for the page header. In the data, the property that stores this image is called profile_banner_url.
+- [x] Include your personal background image from Twitter as a background for the page header. In the data, the property that stores this image is called profile_banner_url.

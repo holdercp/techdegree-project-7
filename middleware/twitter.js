@@ -11,11 +11,12 @@ const twitter = (config) => {
     .then(userData => ({
       handle: userData.data.screen_name,
       profImg: userData.data.profile_image_url_https,
+      bannerImg: userData.data.profile_banner_url,
     }));
 
   const getSenderImg = userId => twit.get('users/show', { user_id: userId }).then(sender => sender.data.profile_image_url_https);
 
-  const getTimeline = () => twit.get('statuses/home_timeline', { count: 5 }).then(result => result.data.map(tweet => ({
+  const getTimeline = () => twit.get('statuses/home_timeline', { count: 20 }).then(result => result.data.map(tweet => ({
     name: tweet.user.name,
     handle: tweet.user.screen_name,
     profImg: tweet.user.profile_image_url_https,
@@ -25,7 +26,7 @@ const twitter = (config) => {
     countFav: tweet.favorite_count,
   })));
 
-  const getFriends = () => twit.get('friends/list', { count: 5 }).then(result => result.data.users.map(friend => ({
+  const getFriends = () => twit.get('friends/list', { count: 20 }).then(result => result.data.users.map(friend => ({
     name: friend.name,
     handle: friend.screen_name,
     profImg: friend.profile_image_url_https,
@@ -37,7 +38,7 @@ const twitter = (config) => {
     return ids;
   };
 
-  const getMessages = () => twit.get('direct_messages/events/list', { count: 5 }).then((messageList) => {
+  const getMessages = () => twit.get('direct_messages/events/list', { count: 20 }).then((messageList) => {
     const uniqueIds = messageList.data.events.reduce(onlyUniqueIds, []);
 
     return Promise.all(
