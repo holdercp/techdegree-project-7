@@ -2213,8 +2213,8 @@ body {
 .app--avatar {
   background-repeat: no-repeat;
   background-size: cover;
-  width: 54px;
-  height: 54px;
+  width: 48px;
+  height: 48px;
   float: left;
   margin-left: -70px;
   overflow: hidden;
