@@ -77,3 +77,19 @@ NOTE: Twitter API Update: The Twitter API now asks that API users no longer targ
 NOTE: You don’t have to display direct messages as a back and forth conversation. Displaying only sent or received messages is fine.
 
 Make sure the application actually renders your correct Twitter information by running it on your local machine and comparing it to your recent Twitter activity.
+
+## Extra Credit
+
+To get an "exceeds" rating, you can expand on the project in the following ways:
+
+### Post a new Tweet
+
+- [ ] Add a section to the bottom of your page that allows a user to post a new tweet. The new tweet should display without having to manually refresh the page.
+
+### Error page
+
+- [ ] Add an error page to your application, so that if the user navigates to a non-existent route, the user will see a friendly message rendered, instead of the default error code.
+
+### Custom background image
+
+- [ ] Include your personal background image from Twitter as a background for the page header. In the data, the property that stores this image is called profile_banner_url.
