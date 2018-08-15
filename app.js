@@ -11,8 +11,8 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  Promise.all([t.getTimeline(), t.getFriends(), t.getMessages(), t.getUser()]).then((results) => {
-    const [timeline, friends, messages, user] = results;
+  t.getData().then((data) => {
+    const [timeline, friends, messages, user] = data;
 
     res.render('index', {
       timeline,

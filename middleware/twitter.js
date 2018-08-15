@@ -46,7 +46,7 @@ const twitter = (config) => {
         [id]: img,
       }))),
     ).then((senderImgs) => {
-      // Then transform arr into a single object of key: value pairs
+      // Then transform arr into a single object of id: imgUrl pairs
       const senderIdAndImg = Object.assign({}, ...senderImgs);
 
       return messageList.data.events.map(message => ({
@@ -58,11 +58,10 @@ const twitter = (config) => {
     });
   });
 
+  const getData = () => Promise.all([getTimeline(), getFriends(), getMessages(), getUser()]);
+
   return {
-    getTimeline,
-    getFriends,
-    getMessages,
-    getUser,
+    getData,
   };
 };
 
