@@ -20,7 +20,7 @@ const twitter = (config) => {
     handle: tweet.user.screen_name,
     profImg: tweet.user.profile_image_url_https,
     text: tweet.text,
-    hoursAgo: dateHelper.hoursDiff(tweet.created_at),
+    time: dateHelper.formatDate(tweet.created_at),
     countRT: tweet.retweet_count,
     countFav: tweet.favorite_count,
   })));
@@ -37,7 +37,7 @@ const twitter = (config) => {
     return ids;
   };
 
-  const getMessages = () => twit.get('direct_messages/events/list').then((messageList) => {
+  const getMessages = () => twit.get('direct_messages/events/list', { count: 5 }).then((messageList) => {
     const uniqueIds = messageList.data.events.reduce(onlyUniqueIds, []);
 
     return Promise.all(
@@ -52,7 +52,7 @@ const twitter = (config) => {
       return messageList.data.events.map(message => ({
         senderId: message.message_create.sender_id,
         text: message.message_create.message_data.text,
-        hoursAgo: dateHelper.hoursDiff(parseInt(message.created_timestamp, 10)),
+        time: dateHelper.formatDate(parseInt(message.created_timestamp, 10)),
         senderImg: senderIdAndImg[message.message_create.sender_id],
       }));
     });

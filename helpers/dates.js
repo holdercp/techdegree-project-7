@@ -1,10 +1,16 @@
-function hoursDiff(pastTime) {
-  const now = new Date();
-  const then = new Date(pastTime);
+function formatDate(date) {
+  const dateObj = new Date(date);
 
-  const msDiff = now.getTime() - then.getTime();
+  const options = {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    hour12: true,
+    hour: '2-digit',
+    minute: '2-digit',
+  };
 
-  return Math.trunc(msDiff / 3600000);
+  return dateObj.toLocaleString('en-US', options);
 }
 
-module.exports = { hoursDiff };
+module.exports = { formatDate };

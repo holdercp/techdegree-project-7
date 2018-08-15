@@ -6,4 +6,4 @@ ul.app--message--list
           .app--avatar(style=`background-image: url(${message.senderImg})`)
             img(src=message.senderImg)
           p.app--message--text= message.text
-          p.app--message--timestamp= `${message.hoursAgo === 0 ? '<1' : message.hoursAgo}h ago`
+          p.app--message--timestamp= message.time

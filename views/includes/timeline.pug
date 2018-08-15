@@ -1,7 +1,7 @@
 ul.app--tweet--list
   each tweet in timeline
     li
-      strong.app--tweet--timestamp= `${tweet.hoursAgo === 0 ? '<1' : tweet.hoursAgo}h`
+      strong.app--tweet--timestamp= tweet.time
       a.app--tweet--author
         .app--avatar(style=`background-image: url(${tweet.profImg})`)
           img(src=`${tweet.profImg}`)
