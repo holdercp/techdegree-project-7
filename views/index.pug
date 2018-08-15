@@ -26,10 +26,19 @@ block content
           h2 Direct Messages
     .grid-33
       .app--section
-        include includes/timeline.pug
+        if timeline.length > 0
+          include includes/timeline.pug
+        else
+          p.empty There's nothing to display here :(
     .grid-33
       .app--section
-        include includes/friends.pug
+        if timeline.length > 0
+          include includes/friends.pug
+        else
+          p.empty There's nothing to display here :(
     .grid-33
       .app--section
-        include includes/messages.pug
+        if timeline.length > 0
+          include includes/messages.pug
+        else
+          p.empty There's nothing to display here :(

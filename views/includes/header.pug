@@ -1,4 +1,4 @@
-header(class='circle--header', style=`background: no-repeat center / cover url(${user.bannerImg})`)
+header(class='circle--header', style=(user.bannerImg) ? `background: no-repeat center / cover url(${user.bannerImg})` : '')
   .bounds
     .circle--fluid
       .circle--fluid--cell

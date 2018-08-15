@@ -2500,3 +2500,9 @@ input[type="reset"],
 input[type="button"] {
   padding: 16px 20px;
 }
+
+/* Custom Styles */
+.empty {
+  font-size: 1.5em;
+  padding: 1em;
+}
