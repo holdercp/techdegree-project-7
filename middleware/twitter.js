@@ -49,12 +49,14 @@ const twitter = (config) => {
       // Then transform arr into a single object of id: imgUrl pairs
       const senderIdAndImg = Object.assign({}, ...senderImgs);
 
-      return messageList.data.events.map(message => ({
-        senderId: message.message_create.sender_id,
-        text: message.message_create.message_data.text,
-        time: dateHelper.formatDate(parseInt(message.created_timestamp, 10)),
-        senderImg: senderIdAndImg[message.message_create.sender_id],
-      }));
+      return messageList.data.events
+        .map(message => ({
+          senderId: message.message_create.sender_id,
+          text: message.message_create.message_data.text,
+          time: dateHelper.formatDate(parseInt(message.created_timestamp, 10)),
+          senderImg: senderIdAndImg[message.message_create.sender_id],
+        }))
+        .reverse();
     });
   });
 
