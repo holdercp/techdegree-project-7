@@ -88,7 +88,7 @@ To get an "exceeds" rating, you can expand on the project in the following ways:
 
 ### Error page
 
-- [ ] Add an error page to your application, so that if the user navigates to a non-existent route, the user will see a friendly message rendered, instead of the default error code.
+- [x] Add an error page to your application, so that if the user navigates to a non-existent route, the user will see a friendly message rendered, instead of the default error code.
 
 ### Custom background image
 
