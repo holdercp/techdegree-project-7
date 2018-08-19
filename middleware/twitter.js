@@ -9,6 +9,7 @@ const twitter = (config) => {
     .then(user => user.data.screen_name)
     .then(handle => twit.get('users/show', { screen_name: handle }))
     .then(userData => ({
+      id: userData.data.id_str,
       handle: userData.data.screen_name,
       profImg: userData.data.profile_image_url_https,
       bannerImg: userData.data.profile_banner_url,
