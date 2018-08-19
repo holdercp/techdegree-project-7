@@ -1,6 +1,24 @@
 # Twitter Interface
 
-## Set up a new Express project in the provided app.js file
+## How to Get up and Running
+
+1. From your console run `npm install` to install necessary dependencies.
+1. Create a `config.js` file and place it in the project root. Inside this file, store you Twitter keys and tokens. It should look something like this:
+
+```javascript
+module.exports = {
+  consumer_key: "[your consumer key]",
+  consumer_secret: "[your consumer secret]",
+  access_token: "[your access token]",
+  access_token_secret: "[your token secret]"
+};
+```
+
+---
+
+## Project Requirements
+
+### Set up a new Express project in the provided app.js file
 
 You will need to create the following files:
 
@@ -11,13 +29,13 @@ You will need to create the following files:
 
 - [x] _Complete_
 
-## Create a new Twitter application
+### Create a new Twitter application
 
 This will generate the keys and access tokens you need to authenticate your application so it can communicate with the Twitter API. You can find a link to a tutorial on how to do this in the project resources. Please note that while the tutorial says to create a Twitter dev account at dev.twitter.com, the url to create a Twitter dev account is now https://apps.twitter.com/
 
 - [x] _Complete_
 
-## Use and interact with the Twitter API
+### Use and interact with the Twitter API
 
 To use and interact with the Twitter API, you’ll need to set up a way to give the Twitter API the set of keys and access tokens that were generated when you create your Twitter app. It’s a good idea to use an npm module to help you with this part. For this project, you’ll use an npm module called Twit. You can find a link in the project resources. Be sure to look through the documentation and familiarize yourself with how it works.
 
@@ -33,7 +51,7 @@ NOTE: The config.js file must be listed in the .gitignore file so it won’t be 
 
 - [x] _Complete_
 
-## Make a Pug/Jade template for the main page
+### Make a Pug/Jade template for the main page
 
 The template should have spaces for:
 
@@ -46,12 +64,12 @@ Styling is not the important part of this project. Craft your template markup to
 
 - [x] _Complete_
 
-## Handle requests and routes using Node and Express
+### Handle requests and routes using Node and Express
 
 Using Node and Express, request the data you need from Twitter’s API, render it in your template, and send it to the client at the “/” route. Please avoid using Express generator to set up this project. It will be good practice to set up a simple Express app yourself!
 Each rendered result must include all of the information seen in the sample layout:
 
-### Tweets
+#### Tweets
 
 - message content
 - number of retweets
@@ -64,7 +82,7 @@ Each rendered result must include all of the information seen in the sample layo
 
 - [x] _Complete_
 
-### Messages
+#### Messages
 
 - message body
 - date the message was sent
@@ -78,18 +96,18 @@ NOTE: You don’t have to display direct messages as a back and forth conversati
 
 Make sure the application actually renders your correct Twitter information by running it on your local machine and comparing it to your recent Twitter activity.
 
-## Extra Credit
+### Extra Credit
 
 To get an "exceeds" rating, you can expand on the project in the following ways:
 
-### Post a new Tweet
+#### Post a new Tweet
 
 - [x] Add a section to the bottom of your page that allows a user to post a new tweet. The new tweet should display without having to manually refresh the page.
 
-### Error page
+#### Error page
 
 - [x] Add an error page to your application, so that if the user navigates to a non-existent route, the user will see a friendly message rendered, instead of the default error code.
 
-### Custom background image
+#### Custom background image
 
 - [x] Include your personal background image from Twitter as a background for the page header. In the data, the property that stores this image is called profile_banner_url.
