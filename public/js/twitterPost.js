@@ -1,4 +1,8 @@
 (function twitterPost() {
+  const tweetBox = document.getElementById('tweet-textarea');
+  const tweetBtn = document.querySelector('.app--tweet button');
+  const remainingChars = document.getElementById('tweet-char');
+
   function buildTweet(tweetData, nodeToClone) {
     const tweetClone = nodeToClone.cloneNode(true);
     const time = tweetClone.querySelector('strong.app--tweet--timestamp');
@@ -46,7 +50,6 @@
   function submitTweet(e) {
     e.preventDefault();
     // TODO: This should be sanitized IRL
-    const tweetBox = document.getElementById('tweet-textarea');
     const content = tweetBox.value;
 
     if (content) {
@@ -55,7 +58,14 @@
     }
   }
 
-  const tweetBtn = document.querySelector('.app--tweet button');
+  function calcRemainingChars() {
+    const charsEntered = tweetBox.value.length;
+    const totalChars = 140;
+    const remaining = totalChars - parseInt(charsEntered, 10);
+
+    remainingChars.innerText = remaining;
+  }
 
   tweetBtn.addEventListener('click', submitTweet);
+  tweetBox.addEventListener('keyup', calcRemainingChars);
 }());
