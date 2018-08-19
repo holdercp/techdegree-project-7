@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const twitter = require('./middleware/twitter.js');
 const config = require('./config.js');
 
@@ -8,6 +9,7 @@ const t = twitter(config);
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', (req, res, next) => {
@@ -27,6 +29,12 @@ app.get('/', (req, res, next) => {
       err.status = 500;
       next(err);
     });
+});
+
+app.post('/tweet', (req, res) => {
+  t.postTweet(req.body.content).then((tweet) => {
+    res.send(tweet);
+  });
 });
 
 app.use((req, res, next) => {

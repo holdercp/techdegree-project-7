@@ -59,10 +59,21 @@ const twitter = (config) => {
     });
   });
 
+  const postTweet = status => twit.post('statuses/update', { status }).then(tweet => ({
+    name: tweet.data.user.name,
+    handle: tweet.data.user.screen_name,
+    profImg: tweet.data.user.profile_image_url_https,
+    text: tweet.data.text,
+    time: dateHelper.formatDate(tweet.data.created_at),
+    countRT: tweet.data.retweet_count,
+    countFav: tweet.data.favorite_count,
+  }));
+
   const getData = () => Promise.all([getTimeline(), getFriends(), getMessages(), getUser()]);
 
   return {
     getData,
+    postTweet,
   };
 };
 
