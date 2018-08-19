@@ -84,7 +84,7 @@ To get an "exceeds" rating, you can expand on the project in the following ways:
 
 ### Post a new Tweet
 
-- [ ] Add a section to the bottom of your page that allows a user to post a new tweet. The new tweet should display without having to manually refresh the page.
+- [x] Add a section to the bottom of your page that allows a user to post a new tweet. The new tweet should display without having to manually refresh the page.
 
 ### Error page
 
