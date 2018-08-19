@@ -31,10 +31,16 @@ app.get('/', (req, res, next) => {
     });
 });
 
-app.post('/tweet', (req, res) => {
-  t.postTweet(req.body.content).then((tweet) => {
-    res.send(tweet);
-  });
+app.post('/tweet', (req, res, next) => {
+  t.postTweet(req.body.content)
+    .then((tweet) => {
+      res.send(tweet);
+    })
+    .catch(() => {
+      const err = new Error('Whoops! Something went wrong.');
+      err.status = 500;
+      next(err);
+    });
 });
 
 app.use((req, res, next) => {
