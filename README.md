@@ -2,7 +2,7 @@
 
 ## How to Get up and Running
 
-1. From your console run `npm install` to install necessary dependencies.
+1. From your console run `npm install` to install necessary dependencies. You can also just run `npm install --only=production` if you do not want to install the dev dependencies.
 1. Create a `config.js` file and place it in the project root. Inside this file, store you Twitter keys and tokens. It should look something like this:
 
 ```javascript
